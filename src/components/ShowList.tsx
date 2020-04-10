@@ -11,11 +11,11 @@ interface props {
 }
 
 interface state {
-    selected?: number[],
+    selected: boolean[],
     Shows?: JSX.Element[]
 }
 
-interface Anime {
+export interface Anime {
     url: string,
     title: string,
     image_url: string
@@ -28,18 +28,23 @@ export class ShowList extends React.Component<props> {
     state: state
     constructor(props: props) {
         super(props)
+        let selected: boolean[] = new Array<boolean>(seasons[`${props.season}_${props.year}`].length)
+        for (let i = 0; i < selected.length; i++) {
+            selected[i] = false
+        }
+        
         this.state = {
-            selected: [],
-            Shows: this.getShows(props.year, props.season)
+            selected: selected,
+            Shows: this.getShows(props.year, props.season, selected)
         }
     }
 
 
-    getShows = (year: string, season: string): JSX.Element[] => {
-        return seasons[`${season}_${year}`].map(anime => {
+    getShows = (year: string, season: string, selected: boolean[]): JSX.Element[] => {
+        return seasons[`${season}_${year}`].map((anime, idx) => {
             return (
-                <div className="sixteen wide mobile eight wide tablet four wide computer column">
-                    <Show title={anime.title} url={anime.url} image_url={anime.image_url}/>
+                <div key={idx} className="sixteen wide mobile eight wide tablet four wide computer column">
+                    <Show index={idx} title={anime.title} url={anime.url} image_url={anime.image_url} selected={selected}/>
                 </div>
             )
         })
@@ -49,30 +54,7 @@ export class ShowList extends React.Component<props> {
         return (
             <div className="showlist-container">
             <div className="ui stackable grid padded relaxed">
-                    <div className="sixteen wide mobile eight wide tablet four wide computer column">
-                        <Show 
-                            url="https://myanimelist.net/anime/40902/Shokugeki_no_Souma__Gou_no_Sara"
-                            title="Shokugeki no Souma: Gou no Sara" 
-                            image_url="https://cdn.myanimelist.net/images/anime/1813/106300.jpg"/>
-                    </div>
-                    <div className="sixteen wide mobile eight wide tablet four wide computer column">
-                        <Show 
-                            url="https://myanimelist.net/anime/40540/Sword_Art_Online__Alicization_-_War_of_Underworld_2nd_Season" 
-                            title="Sword Art Online: Alicization - War of Underworld 2nd Season" 
-                            image_url="https://cdn.myanimelist.net/images/anime/1438/105106.jpg"/>
-                    </div>
-                    <div className="sixteen wide mobile eight wide tablet four wide computer column">
-                        <Show 
-                            title="Kaguya-sama wa Kokurasetai?: Tensai-tachi no Renai Zunousen" 
-                            url="https://myanimelist.net/anime/40591/Kaguya-sama_wa_Kokurasetai__Tensai-tachi_no_Renai_Zunousen" 
-                            image_url = "https://cdn.myanimelist.net/images/anime/1764/106659.jpg"/>
-                    </div>
-                    <div className="sixteen wide mobile eight wide tablet four wide computer column">
-                        <Show 
-                            url="https://myanimelist.net/anime/40221/Kami_no_Tou" 
-                            title="Kami no Tou" 
-                            image_url="https://cdn.myanimelist.net/images/anime/1702/106229.jpg"/>
-                    </div>
+                {this.state.Shows}
             </div>
             </div>
         )

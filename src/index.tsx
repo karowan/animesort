@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-      <ShowList year="2017" season="winter"/>
+      <ShowList year="2020" season="winter"/>
   </React.StrictMode>,
   document.getElementById('root')
 );
