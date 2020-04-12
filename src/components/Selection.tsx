@@ -1,6 +1,6 @@
 import React, {useState, SyntheticEvent, MouseEvent } from "react"
 import { Dropdown, Button, DropdownItemProps, DropdownProps } from "semantic-ui-react"
-import Main from "./Main"
+import DatabaseWrapper from "./DatabaseWrapper"
 import "semantic-ui-css/semantic.min.css"
 import "./Selection.css"
 
@@ -125,7 +125,7 @@ export function Selection() {
     }
 
     return (
-        <Main year={year} season={season.toLowerCase()} />
+        <DatabaseWrapper year={year} season={season.toLowerCase()} />
     )
 
 }
