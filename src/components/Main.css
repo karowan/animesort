@@ -11,3 +11,19 @@
     text-align: center;
     padding: 20px;
 }
+
+.center-wrapper-button{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 92vh;
+    width: 70%;
+    left: 15%;
+    text-align: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.grid-position {
+    position: relative;
+    top: -9vh;
+}

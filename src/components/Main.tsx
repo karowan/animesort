@@ -55,8 +55,7 @@ export class Main extends React.Component<Props> {
     gridRoute = ():JSX.Element => {
         return (
             <div>
-                <ShowGrid showList={this.state.showList} trackedShows={this.state.trackedShows} />
-                <div className="center-wrapper">
+                <div className="center-wrapper-button">
                     <Button 
                         size="massive" 
                         fluid 
@@ -67,6 +66,9 @@ export class Main extends React.Component<Props> {
                         color="vk">
                             Submit
                         </Button>
+                </div>
+                <div className="grid-position">
+                    <ShowGrid showList={this.state.showList} trackedShows={this.state.trackedShows} />  
                 </div>
         </div>
         )
