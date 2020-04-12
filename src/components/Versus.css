@@ -1,0 +1,18 @@
+.versus {
+    position: relative;
+    padding-top: 5em;
+    min-width: 500px;
+}
+
+.option:hover {
+    border-style: solid;
+    border-color: rgba(71, 71, 71, 0.787);
+    background-color: rgba(71, 71, 71, 0.192);
+}
+
+.option:active {
+    transform: translate(2px, 2px);
+    border-style: solid;
+    border-color: rgba(24, 212, 87, 0.5);
+    background-color: rgba(24, 212, 87, 0.2);
+}

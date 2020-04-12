@@ -1,56 +1,30 @@
-import React, { MouseEvent } from "react"
-import { Header, Image, Icon, Container } from "semantic-ui-react"
-import Anime from "./ShowList"
+import React from "react"
+import { Container, Header, Image } from "semantic-ui-react"
 import "semantic-ui-css/semantic.min.css"
-import "./Show.css"
+import { showProps }from "../types/types"
 
 
-interface props {
-    index: number,
-    url: string,
-    title: string,
-    image_url: string,
-    selected: boolean[]
-}
-
-interface state {
-    index: number
-    url: string,
-    title: string,
-    image_url: string,
-    selected: boolean[]
-}
-
-export class Show extends React.Component<props> {
-    state: state
-    constructor(props: props) {
+export class Show extends React.Component<showProps> {
+    state: showProps
+    constructor(props: showProps) {
         super(props)
         this.state = {
-            index: props.index,
             url: props.url,
             title: props.title,
-            image_url: props.image_url,
-            selected: props.selected
+            image_url: props.image_url
         }
     }
-
-
-    handleClick = (event: MouseEvent) => {
-        let selected = this.state.selected
-        selected[this.state.index] = !selected[this.state.index] 
-        this.setState({ selected: selected })
-    }
-
+    
 
     render() {
         return (
-            <div className="show-container" onClick = {this.handleClick}>
-                <Container className={`selected-${this.state.selected[this.state.index]}`}>
-                    <Container className="show-text">
-                        <Header as="h3" textAlign="center">{this.state.title}</Header>
-                    </Container>
-                    <Image className="show-image" src={this.state.image_url} alt={this.state.title} bordered={this.state.selected[this.state.index]} />
+            <div >
+                <Container className="show-text">
+                    <Header as="h3" textAlign="center">
+                        {this.props.title.length < 47 ? this.props.title : this.props.title.substr(0, 44) + "..."}
+                    </Header>
                 </Container>
+                <Image className="show-image" src={this.props.image_url} alt={this.props.title} />
             </div>
         )
     }
