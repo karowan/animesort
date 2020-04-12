@@ -114,9 +114,11 @@ export class Versus extends React.Component<Props> {
                  />)
         }
         return (
-            <List celled={true} divided={true} >
-                {list}
-            </List>
+            <div className="show-list">
+                <List celled={true} divided={true} >
+                    {list}
+                </List>
+            </div>
         )
     }
 

@@ -9,8 +9,6 @@ import { showProps } from "../types/types"
 
 
 type Props = {
-    season: string,
-    year: string,
     showList: showProps[]
 }
 
@@ -57,8 +55,7 @@ export class Main extends React.Component<Props> {
     gridRoute = ():JSX.Element => {
         return (
             <div>
-                <h1 className="title-header" >{this.props.season} {this.props.year} Anime Season</h1>
-                <ShowGrid anime={this.state.showList} trackedShows={this.state.trackedShows} />
+                <ShowGrid showList={this.state.showList} trackedShows={this.state.trackedShows} />
                 <div className="center-wrapper">
                     <Button 
                         size="massive" 

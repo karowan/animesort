@@ -1,5 +1,6 @@
 import React from "react"
 import Main from "./Main"
+import "./Main.css"
 import { showProps } from "../types/types"
 import Seasons from "../variables/seasons.json"
 
@@ -23,7 +24,12 @@ export class DatabaseWrapper extends React.Component<Props> {
     }
 
     render() {
-        return <Main season={this.props.season} year={this.props.year} showList={this.state.showList} />
+        return (
+            <div>
+                <h1 className="title-header" >{this.props.season} {this.props.year} Anime Season</h1>
+                <Main showList={this.state.showList} />
+            </div>
+        )
     }
 } 
 

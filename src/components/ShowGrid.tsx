@@ -7,7 +7,7 @@ import { showProps }from "../types/types"
 
 
 type props = {
-    anime: showProps[],
+    showList: showProps[],
     trackedShows: boolean[]
 }
 
@@ -23,16 +23,16 @@ export class ShowGrid extends React.Component<props> {
         super(props)
         this.state = {
             trackedShows: props.trackedShows,
-            Shows: this.getShows(props.anime, this.props.trackedShows)
+            Shows: this.getShows(props.showList, this.props.trackedShows)
         }
     }
 
 
-    getShows = (animeList: showProps[], selected: boolean[]): JSX.Element[] => {
-        return animeList.map((anime, idx) => {
+    getShows = (showList: showProps[], selected: boolean[]): JSX.Element[] => {
+        return showList.map((show, idx) => {
             return (
                 <Grid.Column key={idx} mobile="16" tablet="8" computer="4" widescreen="3">
-                    <ShowSelection index={idx} title={anime.title} url={anime.url} image_url={anime.image_url} selected={selected}/>
+                    <ShowSelection index={idx} title={show.title} url={show.url} image_url={show.image_url} selected={selected}/>
                 </Grid.Column>
             )
         })
