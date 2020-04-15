@@ -6,9 +6,21 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-      <Selection/>
-  </React.StrictMode>,
+  <div>
+    <div className="header-top">
+      <div className="header-text">
+        <p>Source code can be found on my <a href="https://github.com/karowan/animesort">github</a></p>
+      </div>
+      
+    </div>
+    <div className="main">
+      <React.StrictMode>
+          <Selection/>
+      </React.StrictMode>
+    </div>
+    
+
+  </div>,
   document.getElementById('root')
 );
 

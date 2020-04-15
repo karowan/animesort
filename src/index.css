@@ -13,3 +13,22 @@ code {
     monospace;
 }
 
+.main{
+  height: 100vh;
+  padding-top:60px; 
+}
+.header-top {
+background-color: #212121;
+text-align: right;
+position: absolute;
+left: 0;
+width: 100%;
+padding: 15px 0;
+height: 5%;
+}
+
+.header-text {
+  position: relative;
+  color: aliceblue;
+  padding-right: 40px;
+}
