@@ -1,14 +1,25 @@
 import React, {useState, SyntheticEvent, MouseEvent } from "react"
 import { Dropdown, Button, DropdownItemProps, DropdownProps } from "semantic-ui-react"
-import DatabaseWrapper from "./DatabaseWrapper"
+import Axios from "axios"
 import "semantic-ui-css/semantic.min.css"
 import "./Selection.css"
+import { showProps } from "../types/types"
+import { Main } from "./Main"
 
-
+type Anime = showProps & {type: string, airing_start: string}
 
 export function Selection() {
     
+    // type showTypes = {
+
+    // }
+
+    const [isLoading, setIsLoading] = useState(false)
+
     const [submitPressed, setSubmitPressed] = useState(false)
+    
+    const emptyList: showProps[] = []
+    const [showList, setShowList] = useState(emptyList)
     
     let defaultSeason = ((): string => {
         let month = (new Date()).getMonth()
@@ -30,8 +41,7 @@ export function Selection() {
     let defaultYear: number = season === "Fall" ? todayYear - 1 : todayYear
     const [year, setYear] = useState(`${defaultYear}`)
 
-    // Edit this when sooner years are supported
-    const minYear = 2009
+    const minYear = 1990
 
     
 
@@ -80,15 +90,43 @@ export function Selection() {
     }
 
     const handleSubmit = function(event: MouseEvent) {
-        console.log(year, season);
-        
         event.preventDefault()
         setSubmitPressed(true)
+        setIsLoading(true)
+        loadAPI()
+    }
+
+    const checkType: (year: string) => (anime: Anime) => boolean = (year: string) => {
+        return (anime: Anime) => {
+            return anime.type === "TV" && anime.airing_start != null && anime.airing_start.substring(0,4) === year
+        }
+    }
+
+    const loadAPI = function() {
+        Axios.get(`https://api.jikan.moe/v3/season/${year}/${season.toLowerCase()}`)
+        .then(res => {
+            let anime: Anime[] = res.data.anime;
+        
+        
+            let ret = anime.filter(checkType(year)).map((show: Anime) => {
+                return {
+                    url: show.url,
+                    title: show.title,
+                    image_url: show.image_url
+                }
+            })
+            setShowList(ret)
+            setIsLoading(false)
+        })
+        
+
+        
+       
     }
 
     
     
-    if(!submitPressed) {
+    if(!submitPressed || isLoading) {
         return (
             <div className="center-dropdown">
                 <div className="season dropdown">
@@ -98,6 +136,9 @@ export function Selection() {
                     selection
                     onChange={handleSeasonChange}
                     options={seasonOptions}
+                    button
+                    className="big"
+                    search={true}
                     />
                 </div>
                 <div className="year dropdown">
@@ -107,25 +148,34 @@ export function Selection() {
                     selection
                     onChange={handleYearChange}
                     options={yearOptions}
+                    button
+                    className="big"
+                    search={true}
                     />
                 </div>
                 <div className="dropdown-button dropdown">
                     <Button 
                     size="big"
-                    compact
                     color="vk"
                     fluid
+                    loading={isLoading}
+                    disabled={isLoading}
                     onClick={handleSubmit}
                     >
-                        Get Shows
+                        Compare
                     </Button>
                 </div>
+                
             </div>
+            
         )
     }
 
     return (
-        <DatabaseWrapper year={year} season={season.toLowerCase()} />
+        <div>
+            <h1 className="title-header" >{season} {year} Anime Season</h1>
+            <Main showList={showList} />
+        </div>
     )
 
 }
