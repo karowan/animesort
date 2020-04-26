@@ -1,5 +1,5 @@
 import React, {useState, SyntheticEvent, MouseEvent } from "react"
-import { Dropdown, Button, DropdownItemProps, DropdownProps } from "semantic-ui-react"
+import { Dropdown, Button, DropdownItemProps, DropdownProps, Container } from "semantic-ui-react"
 import Axios from "axios"
 import "semantic-ui-css/semantic.min.css"
 import "./Selection.css"
@@ -47,7 +47,7 @@ export function Selection() {
 
     let yearOptions = ((): DropdownItemProps[] => {
         let options: DropdownItemProps[] = []
-        for (let i = defaultYear; i >= minYear; i--) {
+        for (let i = (new Date()).getFullYear(); i >= minYear; i--) {
             options.push({
                 key: `${i}`,
                 text: `${i}`,
@@ -173,8 +173,11 @@ export function Selection() {
 
     return (
         <div>
-            <h1 className="title-header" >{season} {year} Anime Season</h1>
-            <Main showList={showList} />
+            <Container textAlign="center">
+                <Container as="h1" textAlign="center" >{season} {year} Anime Season</Container>
+                <Main showList={showList} />
+
+            </Container>
         </div>
     )
 

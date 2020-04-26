@@ -1,5 +1,5 @@
 import React from "react"
-import { Button } from "semantic-ui-react"
+import { Button, Container } from "semantic-ui-react"
 import "semantic-ui-css/semantic.min.css"
 import "./Main.css"
 import ShowGrid from "./ShowGrid"
@@ -54,10 +54,13 @@ export class Main extends React.Component<Props> {
 
     gridRoute = ():JSX.Element => {
         return (
-            <div>
+            <Container textAlign="center">
+                <div className="grid-position">
+                    <ShowGrid showList={this.state.showList} trackedShows={this.state.trackedShows} />  
+                </div>
                 <div className="center-wrapper-button">
                     <Button 
-                        size="massive" 
+                        size="massive"
                         fluid 
                         className="submit-button" 
                         loading={this.state.submitPressed} 
@@ -67,10 +70,7 @@ export class Main extends React.Component<Props> {
                             Submit
                         </Button>
                 </div>
-                <div className="grid-position">
-                    <ShowGrid showList={this.state.showList} trackedShows={this.state.trackedShows} />  
-                </div>
-        </div>
+            </Container>
         )
     }
 

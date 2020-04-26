@@ -1,10 +1,10 @@
 import React from "react"
-import { Grid, Header, List } from "semantic-ui-react"
+import { Grid, Container } from "semantic-ui-react"
 import Show from "./Show"
 import "semantic-ui-css/semantic.min.css"
 import "./Versus.css"
 import { showProps } from "../types/types"
-import ShowListElement from "./ShowListElement"
+import FinalList from "./FinalList"
 
 
 interface Props {
@@ -101,26 +101,7 @@ export class Versus extends React.Component<Props> {
         } 
 
 
-    createList = (): JSX.Element => {
-        let list: JSX.Element[] = []
-        for (let key = this.state.sortList.length - 1; key >= 0 ; key--) {
-            const element = this.state.sortList[key];
-            list.push(<ShowListElement 
-                key={key}
-                place={this.state.sortList.length - key} 
-                url={element.url}
-                title={element.title} 
-                image_url={element.image_url}
-                 />)
-        }
-        return (
-            <div className="show-list">
-                <List celled={true} divided={true} >
-                    {list}
-                </List>
-            </div>
-        )
-    }
+
 
 
     isFinished = (done: boolean)  => {
@@ -132,13 +113,13 @@ export class Versus extends React.Component<Props> {
         if (done) {
             
             return (
-                this.createList()
+                <FinalList sortList={this.state.sortList}></FinalList>
             )
         }
 
         return (
             <div className="versus">
-                <Header as="h1" className="center-wrapper">Select the better of the two.</Header>
+                <Container as="h1" textAlign="center">Select the better of the two.</Container>
                 <Grid className="ui" stackable padded relaxed columns={2} centered>
                     <Grid.Column mobile="16" tablet="8" computer="4" widescreen="3">
                         <div className="a option" onClick={this.handleA}>

@@ -40,11 +40,9 @@ export class ShowGrid extends React.Component<props> {
 
     render() {
         return (
-            <div className="ShowGrid-container">
-                <div className="ui stackable grid padded relaxed">
+                <div style={{display: "block"}} className="ShowGrid ui stackable grid">
                     {this.state.Shows}
                 </div>
-            </div>
         )
     }
 }

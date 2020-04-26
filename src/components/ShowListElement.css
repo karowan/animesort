@@ -1,8 +1,8 @@
 .list-item-title {
     position: relative;
-    top: 40%;
+    top: 30%;
 }
 
 .show-list-element {
-    padding-left: 5vw;
+    width: 50%;
 }

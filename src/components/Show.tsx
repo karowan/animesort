@@ -1,7 +1,8 @@
 import React from "react"
-import { Container, Header, Image } from "semantic-ui-react"
+import { Image } from "semantic-ui-react"
 import "semantic-ui-css/semantic.min.css"
 import { showProps }from "../types/types"
+import "./Show.css"
 
 
 export class Show extends React.Component<showProps> {
@@ -19,11 +20,9 @@ export class Show extends React.Component<showProps> {
     render() {
         return (
             <div >
-                <Container className="show-text">
-                    <Header as="h3" textAlign="center">
-                        {this.props.title.length < 47 ? this.props.title : this.props.title.substr(0, 44) + "..."}
-                    </Header>
-                </Container>
+                <div className="show-text">
+                        {this.props.title}
+                </div>
                 <Image className="show-image" src={this.props.image_url} alt={this.props.title} />
             </div>
         )
